@@ -1,46 +1,57 @@
-import { demos } from '@/lib/demos';
-import Link from 'next/link';
+import Image from 'next/image'
+import styles from './page.module.css'
 
-export default function Page() {
+export default function Home() {
   return (
-    <div className="space-y-6">
-      <div className="space-y-8 text-white">
-        {demos
-          .filter((section) =>
-            section?.items?.some((x) => typeof x.isDisabled === 'undefined'),
-          )
-          .map((section) => {
-            return (
-              <div key={section.name} className="space-y-3">
-                <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
-                  {section.name}
-                </div>
+    <div className={styles.container}>
+      <main className={styles.main}>
+        <h1 className={styles.title}>
+          Welcome to <a href="https://nextjs.org">Next.js 13!</a>
+        </h1>
 
-                <div className="grid grid-cols-2 gap-5">
-                  {section.items
-                    .filter((item) => !item.isDisabled)
-                    .map((item) => {
-                      return (
-                        <Link
-                          href={`/${item.slug}`}
-                          key={item.name}
-                          className="block space-y-1.5 rounded-lg border border-white/10 px-4 py-3 hover:border-white/20"
-                        >
-                          <div>{item.name}</div>
+        <p className={styles.description}>
+          Get started by editing{' '}
+          <code className={styles.code}>app/page.tsx</code>
+        </p>
 
-                          {item.description ? (
-                            <div className="line-clamp-3 text-sm text-zinc-400">
-                              {item.description}
-                            </div>
-                          ) : null}
-                        </Link>
-                      );
-                    })}
-                </div>
-              </div>
-            );
-          })}
-      </div>
+        <div className={styles.grid}>
+          <a href="https://beta.nextjs.org/docs" className={styles.card}>
+            <h2>Documentation &rarr;</h2>
+            <p>Find in-depth information about Next.js 13</p>
+          </a>
+
+          <a
+            href="https://github.com/vercel/next.js/tree/canary/examples"
+            className={styles.card}
+          >
+            <h2>Examples &rarr;</h2>
+            <p>Explore the Next.js 13 playground.</p>
+          </a>
+
+          <a
+            href="https://vercel.com/templates/next.js/app-directory?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.card}
+          >
+            <h2>Deploy &rarr;</h2>
+            <p>Deploy your Next.js site to a public URL with Vercel.</p>
+          </a>
+        </div>
+      </main>
+
+      <footer className={styles.footer}>
+        <a
+          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Powered by{' '}
+          <span className={styles.logo}>
+            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+          </span>
+        </a>
+      </footer>
     </div>
-  );
+  )
 }
